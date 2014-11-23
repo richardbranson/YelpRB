@@ -7,6 +7,7 @@
 ######### SOLUTION #########
 
 require_relative 'lib/name'
+require_relative 'lib/yelp'
 
 ######### GET USER INPUT #########
 system "clear"
@@ -21,7 +22,14 @@ sleep 2
 puts "=" * 5 + " but first..."
 sleep 1
 user = ask_name # Define "ask_name" method in new file called name.rb.
-
+sleep 1
+puts "Where are you now? Accepts:(City, County or Post Code)"
+location = gets.chomp.capitalize # Get user input and asign it to location
 
 ######### SERACH YELP API #########
+search = Yelp.new(user, location)
+search.search_query
+
+puts
+
 ######### DISPLAY RESULTS TO USER #########
