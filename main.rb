@@ -5,9 +5,13 @@
 # Must be object oriented. You must instantiate modeled classes. The only file that can run without classes is your runner.
 # Push code on Github.
 ######### SOLUTION #########
-
-require_relative 'lib/name'
+require 'rubygems'
+require 'oauth' 
+require 'pry'
+require 'json'
 require_relative 'lib/yelp'
+require_relative 'lib/name'
+
 
 ######### GET USER INPUT #########
 system "clear"
@@ -24,12 +28,13 @@ sleep 1
 user = ask_name # Define "ask_name" method in new file called name.rb.
 sleep 1
 puts "Where are you now? Accepts:(City, County or Post Code)"
-location = gets.chomp.capitalize # Get user input and asign it to location
+location = gets.chomp.gsub(" ", "+") # Get user input and asign it to location
 
 ######### SERACH YELP API #########
 search = Yelp.new(user, location)
-search.search_query
+search.search_param
 
 puts
 
 ######### DISPLAY RESULTS TO USER #########
+puts "Thanks for using YELP-RB #{user}, hope you liked the results for #{location}."
