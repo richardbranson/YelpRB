@@ -15,7 +15,7 @@ class Yelp
 		puts "Type \"1\" - To find top stuff around you."
 		sleep 1
 		puts "Type \"2\" - To query specific search terms like: pizza, osteopath or pub."
-		@user_choice = gets.chomp
+		@user_choice = gets.chomp.to_s
 		user_choose(@user_choice)
 	end
 
@@ -34,7 +34,7 @@ class Yelp
 			response = access_token.get(path).body
 			parsed = JSON.load(response) 
 				parsed["businesses"].each do |place|
-				puts place["categories"][0][0].to_s + " | " + place["name"] + " | Address: " + place["location"]["display_address"][0].to_s + "| City: " + place["location"]["city"].to_s
+				puts "\n\t" + place["categories"][0][0].to_s + " - Category" + "\n\t" + "_" * 25 + "\n\n" + "\t " + place["name"].upcase + "\n\t | Address: \t" + place["location"]["display_address"][0].to_s + "\n\t | City: \t" + place["location"]["city"].to_s + "\n\t | Tel: \t" + place["display_phone"].to_s + "\n\t | URL: \t" + place["deals.url"].to_s + "\n\t" + "_" * 25
 				end
 		elsif choice == "2"
 			puts "Please enter your search term."
@@ -44,7 +44,7 @@ class Yelp
 			puts "Based on the fact that you're in #{@location}, here are the top 10 locations on Yelp we found for #{term}!"
 			parsed = JSON.load(response) 
 				parsed["businesses"].each do |place|
-				puts place["categories"][0][0].to_s + " | " + place["name"] + " | Address: " + place["location"]["display_address"][0].to_s + "| City: " + place["location"]["city"].to_s
+				puts  "\n\t" + place["categories"][0][0].to_s + " - Category" + "\n\t" + "_" * 25 + "\n\n" + "\t " + place["name"].upcase + "\n\t | Address: \t" + place["location"]["display_address"][0].to_s + "\n\t | City: \t" + place["location"]["city"].to_s + "\n\t | Tel: \t" + place["display_phone"].to_s + "\n\t | URL: \t" + place["deals.url"].to_s + "\n\t" + "_" * 25
 			end
 		end
 	end

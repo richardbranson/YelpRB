@@ -5,7 +5,7 @@
 
 def ask_name
 	puts "=" * 5 + " What's your name?" + "." *  57
-	name = gets.chomp
+	name = gets.chomp.capitalize
 	if name.length <= 2
 		puts "=" * 5 + " Humm... seems a it short. Are you sure that is your name? (Y/N)"
 		name_confirm = gets.chomp

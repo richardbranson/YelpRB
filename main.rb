@@ -4,37 +4,36 @@
 # Connects to a 3rd party api where the call varies based on what the user gives you.
 # Must be object oriented. You must instantiate modeled classes. The only file that can run without classes is your runner.
 # Push code on Github.
+
 ######### SOLUTION #########
 require 'rubygems'
 require 'oauth' 
 require 'pry'
 require 'json'
+require_relative 'lib/welcome'
 require_relative 'lib/yelp'
 require_relative 'lib/name'
-
+require_relative 'lib/location'
+require_relative 'lib/thanks'
 
 ######### GET USER INPUT #########
 system "clear"
-puts "=" * 80
-puts "=" * 30 + " Welcome to YELP-RB " + "=" * 30
-puts "=" * 5 + " A terminal app that queries the api.yelp.com to find local stuff. " + "=" * 8
-puts "=" * 80
-puts "=" * 80
-sleep 1
-puts "=" * 5 + " You can search for local businesses by keywords."
-sleep 2
-puts "=" * 5 + " but first..."
-sleep 1
+welcome = welcome_script # Define "welcome_script in new file called welcome.rb"
 user = ask_name # Define "ask_name" method in new file called name.rb.
-sleep 1
-puts "Where are you now? Accepts:(City, County or Post Code)"
-location = gets.chomp.gsub(" ", "+") # Get user input and asign it to location
+location = get_location
 
 ######### SERACH YELP API #########
 search = Yelp.new(user, location)
-search.search_param
-
-puts
 
 ######### DISPLAY RESULTS TO USER #########
-puts "Thanks for using YELP-RB #{user}, hope you liked the results for #{location}."
+search.search_param
+
+######### SAY THANKS #########
+# thanks = say_thanks
+puts "Thanks for using RBELP #{user}, hope you liked the results for #{location}."
+
+######### Still to do #########
+# get back the search term variable into the final message
+# break final message into its own method/class/file
+# validate the data input to be numbers only when I ask which type of search is performed, currently it crashes out if a 1 or 2 isn't entered
+# Add extra features like ask if they want to search again.
